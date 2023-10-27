@@ -10,5 +10,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        /* dlaczego lepiej korzystać z tego widoku: -> https://developer.android.com/develop/ui/views/layout/constraint-layout */
     }
 }
