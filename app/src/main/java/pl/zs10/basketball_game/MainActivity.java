@@ -2,6 +2,7 @@ package pl.zs10.basketball_game;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
 import android.view.View;
@@ -12,7 +13,7 @@ public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
     private int punkty = 0;
-
+    private PunktyViewModel punktyViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,13 +26,15 @@ public class MainActivity extends AppCompatActivity {
         View view = binding.getRoot();
         setContentView(view);
 
-        binding.textView.setText(String.valueOf(punkty));
+        punktyViewModel = new ViewModelProvider(this).get(PunktyViewModel.class);
+
+        binding.textView.setText(String.valueOf(punktyViewModel.getPunkty()));
         binding.button.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        punkty++;
-                        binding.textView.setText(String.valueOf(punkty));
+                        punktyViewModel.dodajPKT(1);
+                        binding.textView.setText(String.valueOf(punktyViewModel.getPunkty()));
                     }
                 }
         );
@@ -40,8 +43,8 @@ public class MainActivity extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        punkty+=2;
-                        binding.textView.setText(String.valueOf(punkty));
+                        punktyViewModel.dodajPKT(2);
+                        binding.textView.setText(String.valueOf(punktyViewModel.getPunkty()));
                     }
                 }
         );
@@ -50,8 +53,8 @@ public class MainActivity extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        punkty+=3;
-                        binding.textView.setText(String.valueOf(punkty));
+                        punktyViewModel.dodajPKT(3);
+                        binding.textView.setText(String.valueOf(punktyViewModel.getPunkty()));
                     }
                 }
         );
