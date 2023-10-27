@@ -1,20 +1,27 @@
 package pl.zs10.basketball_game;
 
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 public class PunktyViewModel extends ViewModel {
 
-    private int punkty = 0;
+    private MutableLiveData<Integer> punkty;
 
-    public void setPunkty(int punkty) {
+    public void setPunkty(MutableLiveData<Integer> punkty) {
         this.punkty = punkty;
     }
 
-    public int getPunkty() {
+    public MutableLiveData<Integer> getPunkty() {
+        if(punkty == null) {
+            punkty = new MutableLiveData<>();
+            punkty.setValue(0);
+        }
         return punkty;
     }
 
     public void dodajPKT(int ile) {
-        punkty += ile;
+        if(punkty!=null) {
+            punkty.setValue(punkty.getValue()+ile);
+        }
     }
 }

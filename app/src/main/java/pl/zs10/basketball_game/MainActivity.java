@@ -1,6 +1,7 @@
 package pl.zs10.basketball_game;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -27,14 +28,19 @@ public class MainActivity extends AppCompatActivity {
         setContentView(view);
 
         punktyViewModel = new ViewModelProvider(this).get(PunktyViewModel.class);
+        punktyViewModel.getPunkty().observe(this,
+                new Observer<Integer>() {
+                    @Override
+                    public void onChanged(Integer integer) {
+                        binding.textView.setText(integer.toString());
+                    }
+                });
 
-        binding.textView.setText(String.valueOf(punktyViewModel.getPunkty()));
         binding.button.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         punktyViewModel.dodajPKT(1);
-                        binding.textView.setText(String.valueOf(punktyViewModel.getPunkty()));
                     }
                 }
         );
@@ -44,7 +50,6 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
                         punktyViewModel.dodajPKT(2);
-                        binding.textView.setText(String.valueOf(punktyViewModel.getPunkty()));
                     }
                 }
         );
@@ -54,7 +59,6 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
                         punktyViewModel.dodajPKT(3);
-                        binding.textView.setText(String.valueOf(punktyViewModel.getPunkty()));
                     }
                 }
         );
